@@ -5,7 +5,7 @@ DC="hou02"
 IMAGE="1470578f-2a72-46a0-b082-ade30ac6be48"
 
 KEYNAME="cgalloKey"
-POSTINST="https://pastebin.com/raw/qxwG60mC"
+POSTINST="https://raw.githubusercontent.com/allmightyspiff/autoscale-demo/master/startup.sh"
 echo -e "\e[32mRunning:\e[0m slcli vs create --datacenter=${DC} --hostname=vpx-node --domain=\e[36m${DOMAIN}\e[0m --billing hourly --key=\e[36m${KEYNAME}\e[0m --cpu=1 --memory=1024 --image=${IMAGE} --postinstall=${POSTINST}" 
 
 slcli --really vs create --datacenter=${DC} --hostname=vpx-node --domain=${DOMAIN} --billing hourly --key=${KEYNAME} --cpu=1 --memory=1024 --image=${IMAGE} --postinstall=${POSTINST} > /var/log/minion01.log
@@ -23,7 +23,7 @@ while [ $LOOP -eq 0 ]
 do
     STATUS=`slcli vs detail ${VSID} | grep active_transaction | awk '{print $2}'`
     OWNER=`slcli vs detail ${VSID} | grep active_transaction | awk '{print $2}'`
-    if [ "$STATUS" = "NULL" ] && [ "$OWNER" != "NULL"]
+    if [ "$STATUS" = "NULL" ] && [ "$OWNER" != "NULL" ]
     then 
         echo -e "\e[32mInstance is ready\e[0m"
         LOOP=1
